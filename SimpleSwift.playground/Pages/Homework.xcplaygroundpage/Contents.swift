@@ -27,8 +27,7 @@ print("Welcome to the UW Calculator Playground")
 //: For this latter set of operations, it is safe to assume that `["count"]` (with no additional arguments) is 0, `["avg"]` is also 0, and `["fact"]` is 0. `["1", "fact"]` should return 1, and `["0", "fact"]` should also return 1. (Yes, 0-factorial is 1. True story.)
 //:
 func calculate(_ args: [String]) -> Int {
-    if (args.count == 3) && (args[1].contains("+") || args[1].contains("-") ||
-                            args[1].contains("/") || args[1].contains("%") || args[1].contains("*")) {
+    if (args.count == 3)  {
         let firstNum = Int(args[0]) ?? 0
         let secNum = Int(args[2]) ?? 0
         switch args[1] {
@@ -94,7 +93,6 @@ func calculate(_ arg: String) -> Int {
     for word in arg.split(separator: " ") {
         arr.append(String(word))
     }
-    print(arr)
     return calculate(arr)
     
 }
@@ -179,10 +177,32 @@ calculate("1 -2 3 -4 5 count") == 5
 //: This is worth 1 pt
 
 func calculate(_ args: [String]) -> Double {
-    return -1.0
+        let firstNum = Double(args[0]) ?? 0.0
+        let secNum = Double(args[2]) ?? 0.0
+        print(args[0])
+        switch args[1] {
+        case "+":
+            return Double(firstNum + secNum)
+        case "-":
+            return Double(firstNum - secNum)
+        case "/":
+            return Double(firstNum / secNum)
+        case "*":
+            return Double(firstNum * secNum)
+        case "%":
+            let intNum = Int(firstNum)
+            let intNumTwo = Int(secNum)
+            return Double(intNum % intNumTwo)
+        default:
+            return 0.0
+        }
 }
 func calculate(_ arg: String) -> Double {
-    return -1.0
+    var arr = [String]()
+    for word in arg.split(separator: " ") {
+        arr.append(String(word))
+    }
+    return Double(arr.count - 1)
 }
 
 calculate(["2.0", "+", "2.0"]) == 4.0
